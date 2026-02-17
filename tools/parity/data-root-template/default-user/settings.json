@@ -1,0 +1,6 @@
+{
+    "main_api": "openai",
+    "api_server": "",
+    "preset_settings_openai": "Default",
+    "user_avatar": "default.png"
+}

@@ -36,7 +36,6 @@ whitelist.txt
 secrets.json
 /dist
 /backups/
-tools/parity/fixtures/
 public/movingUI/
 public/QuickReplies/
 content.log
@@ -58,8 +57,3 @@ public/scripts/extensions/third-party
 yarn.lock
 *.code-workspace
 test-results/
-/backend/target/
-
-# Rust build artifacts
-**/target/
-backend/target/

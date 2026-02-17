@@ -1,0 +1,68 @@
+[package]
+name = "sillytavern-backend"
+version = "0.1.0"
+edition = "2021"
+description = "Rust sidecar backend for SillyTavern (strangler-pattern migration)"
+authors = ["SillyTavern Contributors"]
+
+[[bin]]
+name = "sillytavern-backend"
+path = "src/main.rs"
+
+[dependencies]
+# Web framework
+axum = { version = "0.8", features = ["macros", "multipart"] }
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6", features = ["cors", "trace", "compression-gzip"] }
+hyper = { version = "1.6", features = ["full"] }
+
+# Async runtime
+tokio = { version = "1.43", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["preserve_order"] }
+serde_yaml = "0.9"
+
+# HTTP client (for proxying/upstream calls)
+reqwest = { version = "0.12", features = ["json", "stream", "multipart"] }
+
+# Image processing (PNG tEXt/iTXt chunk handling + thumbnail generation)
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp", "bmp", "gif", "tiff"] }
+png = "0.17"
+
+# Filesystem utilities
+walkdir = "2.5"
+tempfile = "3.14"
+zip = "6.0"
+libc = "0.2"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Error handling
+thiserror = "2.0"
+anyhow = "1.0"
+
+# Utilities
+base64 = "0.22"
+uuid = { version = "1.12", features = ["v4"] }
+sanitize-filename = "0.6"
+mime_guess = "2.0"
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1.10"
+rayon = "1.10"
+sha2 = "0.10"
+flate2 = "1.0"
+url = "2.5"
+urlencoding = "2.1"
+
+[dev-dependencies]
+axum-test = "16"
+tower = { version = "0.5", features = ["util"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true

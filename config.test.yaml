@@ -1,0 +1,174 @@
+dataRoot: ./data
+listen: false
+port: 8001
+whitelistMode: false
+enableForwardedWhitelist: false
+basicAuthMode: false
+enableUserAccounts: false
+disableCsrfProtection: true
+securityOverride: true
+browserLaunch:
+  enabled: false
+  browser: default
+  hostname: auto
+  port: -1
+  avoidLocalhost: false
+rustProxy:
+  enabled: true
+  baseUrl: http://127.0.0.1:5051
+  default: node
+  backendHeader: true
+  routes:
+    # Phase 1 — Global
+    /api/ping: rust
+    /version: rust
+    # Phase 2 — Low-Risk Reads
+    /thumbnail: rust
+    /api/avatars: rust
+    /api/backgrounds: rust
+    /api/images: rust
+    # Phase 3 — Simple Writes
+    /api/files: rust
+    /api/sprites: rust
+    /api/assets: rust
+    /api/themes: rust
+    /api/moving-ui: rust
+    /api/quick-replies: rust
+    # Phase 4+5 — Characters
+    /api/characters: rust
+    # Phase 6 — Chats
+    /api/chats: rust
+    # Phase 7 — Groups & World Info
+    /api/groups: rust
+    /api/worldinfo: rust
+    # Phase 8 — Settings, Presets, Secrets, Users, Tokenizers, Extensions, Content
+    /api/settings: rust
+    /api/presets: rust
+    /api/secrets: rust
+    /api/users: rust
+    /api/tokenizers: rust
+    /api/extensions: rust
+    /api/content: rust
+enableServerPlugins: true
+enableServerPluginsAutoUpdate: false
+logging:
+  enableAccessLog: false
+  minLogLevel: 0
+extensions:
+  enabled: true
+  autoUpdate: true
+  models:
+    autoDownload: true
+    classification: Cohee/distilbert-base-uncased-go-emotions-onnx
+    captioning: Xenova/vit-gpt2-image-captioning
+    embedding: Cohee/jina-embeddings-v2-base-en
+    speechToText: Xenova/whisper-small
+    textToSpeech: Xenova/speecht5_tts
+enableDownloadableTokenizers: false
+listenAddress:
+  ipv4: 0.0.0.0
+  ipv6: "[::]"
+protocol:
+  ipv4: true
+  ipv6: false
+dnsPreferIPv6: false
+heartbeatInterval: 0
+ssl:
+  enabled: false
+  certPath: ./certs/cert.pem
+  keyPath: ./certs/privkey.pem
+  keyPassphrase: ""
+whitelist:
+  - ::1
+  - 127.0.0.1
+whitelistDockerHosts: true
+basicAuthUser:
+  username: user
+  password: password
+enableCorsProxy: false
+cors:
+  enabled: true
+  origin:
+    - "null"
+  methods:
+    - OPTIONS
+  allowedHeaders: []
+  exposedHeaders: []
+  credentials: false
+  maxAge: null
+requestProxy:
+  enabled: false
+  url: socks5://username:password@example.com:1080
+  bypass:
+    - localhost
+    - 127.0.0.1
+enableDiscreetLogin: false
+perUserBasicAuth: false
+sso:
+  autheliaAuth: false
+  authentikAuth: false
+hostWhitelist:
+  enabled: false
+  scan: true
+  hosts: []
+sessionTimeout: -1
+rateLimiting:
+  preferRealIpHeader: false
+backups:
+  common:
+    numberOfBackups: 50
+  chat:
+    enabled: true
+    checkIntegrity: true
+    maxTotalBackups: -1
+    throttleInterval: 10000
+thumbnails:
+  enabled: true
+  format: jpg
+  quality: 95
+  dimensions:
+    bg:
+      - 160
+      - 90
+    avatar:
+      - 96
+      - 144
+    persona:
+      - 96
+      - 144
+performance:
+  lazyLoadCharacters: false
+  memoryCacheCapacity: 100mb
+  useDiskCache: true
+cacheBuster:
+  enabled: false
+  userAgentPattern: ""
+allowKeysExposure: false
+skipContentCheck: false
+whitelistImportDomains:
+  - localhost
+  - cdn.discordapp.com
+  - files.catbox.moe
+  - raw.githubusercontent.com
+requestOverrides: []
+promptPlaceholder: "[Start a new chat]"
+openai:
+  randomizeUserId: false
+  captionSystemPrompt: ""
+deepl:
+  formality: default
+mistral:
+  enablePrefix: false
+ollama:
+  keepAlive: -1
+  batchSize: -1
+claude:
+  enableSystemPromptCache: false
+  cachingAtDepth: -1
+  extendedTTL: false
+gemini:
+  apiVersion: v1beta
+  thoughtSignatures: true
+  enableSystemPromptCache: false
+  image:
+    personGeneration: allow_adult
